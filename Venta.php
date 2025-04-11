@@ -123,18 +123,17 @@ class Venta{
     /**
      * incorpora una moto a la lista de motos si esta disponible
      * @param object $objMoto
-     * @return string
+     * @return bool
      */
     public function incorporarMoto($objMoto){
+        $mensaje=false;
         if( $objMoto->getDisponibilidad()){
             $cantMotos= count($this->getMotos());
             $motos[]= $this->getMotos();
             $motos[$cantMotos]=$objMoto;
             $this->setMotos($motos);
             $this->setPrecioFinal($this->getPrecioFinal()+ $objMoto->darPrecioVenta());
-            $mensaje= "Moto incorporada.";
-        }else{
-            $mensaje= "La moto no está a la venta.";
+            $mensaje= true;
         }
         return $mensaje;
     }
