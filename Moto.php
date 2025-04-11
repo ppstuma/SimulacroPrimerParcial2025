@@ -128,8 +128,12 @@ class Moto{
         $this->disponibilidad=$nuevo;
     }
 
+    /**
+     * devuelve los datos en cadena de texto
+     * @return string
+     */
     public function __tostring(){
-        $mensaje="La moto " .$this->getCodigo(). "\nCosto.¿: $" ." con un ". $this->getPorcIncremAnual() . "% de incremento anual." .$this->getCosto() . "\nDescripción:\n".  $this->getDescripcion();
+        $mensaje="La moto " .$this->getCodigo(). "\nCosto: $" ." con un ". $this->getPorcIncremAnual() . "% de incremento anual." .$this->getCosto() . "\nDescripción:\n".  $this->getDescripcion();
         if($this->getDisponibilidad()){
             $mensaje= $mensaje . "\nEstá a la venta.";
         }else{
@@ -145,9 +149,9 @@ class Moto{
      */
     public function darPrecioVenta($unaMoto){
         if( $unaMoto->getDisponibilidad()){
-            $anioActual=2025;
-            $antiguedad= $anioActual - $unaMoto->getAnioFabrica;
-            $venta=$unaMoto->getCosto() + ($unaMoto->getCosto * $unaMoto->getPorcIncremAnual * $unaMoto->$antiguedad);
+            $anioActual=date("Y");
+            $antiguedad= $anioActual - $unaMoto->getAnioFabrica();
+            $venta=$unaMoto->getCosto() + ($unaMoto->getCosto() * $unaMoto->getPorcIncremAnual() * $antiguedad);
             $mensaje= $venta;
         }else{
             $mensaje= -1;

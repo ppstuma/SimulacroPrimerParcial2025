@@ -127,7 +127,7 @@ class Empresa{
         return $mensaje;
     }
 
-     /**
+    /**
      * devuelve la moto con el codigo ingresado
      * @param string $codigoMoto
      * @return object
@@ -162,10 +162,7 @@ class Empresa{
     $precioFinalVenta=0;
     $cantVentas= count($this->getVentasRealizadas());
     
-    
-    if($objCliente->getDadoDBaja()){
-        $mensaje= "Este cliente no puede registrar una venta, está dado de baja.";
-    }else{
+    if( ! $objCliente->getDadoDBaja()){
         for($i=0; $i<$cantCodigos; $i++){
             $unaMoto= $this->retornarMoto($colCodigosMoto[$i]);
             if( $unaMoto!=null && $unaMoto->getDisponibilidad() ){
@@ -174,11 +171,12 @@ class Empresa{
                 $l++;
             }
         }
-
-        $unaVenta= new Venta($cantVentas, date("d,m,y") , $objCliente , $nuevaListaMotos , $precioFinalVenta);
-        $mensaje= "El precio final de la venta es de $" . $precioFinalVenta;
+        if( count($nuevaListaMotos)> 0){
+            $unaVenta= new Venta($cantVentas, date("d,m,y") , $objCliente , $nuevaListaMotos , $precioFinalVenta);
+        }
+        
     }
-    return $mensaje;
+    return $precioFinalVenta;
     }
 
     /**
