@@ -127,25 +127,26 @@ class Empresa{
         return $mensaje;
     }
 
-    /**
+     /**
      * devuelve la moto con el codigo ingresado
      * @param string $codigoMoto
      * @return object
      */
     public function retornarMoto($codigoMoto){
-        $encontrado= false;
+        $motoEncontrada= null;
+        $encontrado=false;
         $cantMotos= count($this->getMotos());
         $i=0;
 
         do{
             if($this->getMotos()[$i]->getCodigo() == $codigoMoto){
-                $encontrado= true;
-                $moto= $this->getMotos()[$i];
+                $motoEncontrada= $this->getMotos()[$i];
+                $encontrado=true;
             }else{
                 $i++;
             }
         }while($i<$cantMotos && !$encontrado);
-        return $moto;
+        return $motoEncontrada;
     }
 
     /**
