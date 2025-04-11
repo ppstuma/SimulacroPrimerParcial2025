@@ -138,7 +138,7 @@ class Empresa{
         $i=0;
 
         do{
-            if($this->getMotos()[$i]->getCodigo == $codigoMoto){
+            if($this->getMotos()[$i]->getCodigo() == $codigoMoto){
                 $encontrado= true;
                 $moto= $this->getMotos()[$i];
             }else{
