@@ -161,18 +161,20 @@ class Empresa{
     $precioFinalVenta=0;
     $cantVentas= count($this->getVentasRealizadas());
     
-    for($i=0; $i<$cantCodigos; $i++){
-        $unaMoto= $this->retornarMoto($colCodigosMoto[$i]);
-        if($unaMoto->getDisponibilidad()){
-            $nuevaListaMotos[$l]=$unaMoto;
-            $precioFinalVenta= $precioFinalVenta + $unaMoto->darPrecioVenta();
-            $l++;
-        }
-    }
+    
     if($objCliente->getDadoDBaja()){
         $mensaje= "Este cliente no puede registrar una venta, está dado de baja.";
     }else{
-        $unaVenta= new Venta($cantVentas, "11/04/25" , $objCliente , $nuevaListaMotos , $precioFinalVenta);
+        for($i=0; $i<$cantCodigos; $i++){
+            $unaMoto= $this->retornarMoto($colCodigosMoto[$i]);
+            if( $unaMoto!=null && $unaMoto->getDisponibilidad() ){
+                $nuevaListaMotos[$l]=$unaMoto;
+                $precioFinalVenta= $precioFinalVenta + $unaMoto->darPrecioVenta($unaMoto);
+                $l++;
+            }
+        }
+
+        $unaVenta= new Venta($cantVentas, date("d,m,y") , $objCliente , $nuevaListaMotos , $precioFinalVenta);
         $mensaje= "El precio final de la venta es de $" . $precioFinalVenta;
     }
     return $mensaje;
