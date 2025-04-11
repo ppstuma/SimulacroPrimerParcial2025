@@ -5,7 +5,7 @@ include_once "Venta.php";
 include_once "Empresa.php";
 
 $objCliente1= new Cliente("Juan" , "Castillo" , "DNI" , 38261539, false);
-$objCliente2= new Cliente("Martina" , "Benitez" , "DNI" , 281367442, true);
+$objCliente2= new Cliente("Martina" , "Benitez" , "DNI" , 281367442, false);
 
 $objMoto1= new Moto(11,2230000, 2022, "Benelli Imperiale 400", 0.85, true);
 $objMoto2= new Moto(12, 584000, 2021, "Zanella Zr 150 Ohe", 0.70, true);
